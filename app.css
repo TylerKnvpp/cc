@@ -127,7 +127,8 @@ h1 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url("/assets/images/chevron-down.svg") 95% / 15% no-repeat #fff;
+  background: url("http://plug.nyc/wp-content/uploads/2020/02/Path-1509.svg")
+    97% / 3% no-repeat #fff;
 }
 
 .add-to-cart-button {
@@ -145,9 +146,23 @@ h1 {
 }
 
 .product-features-image {
+  position: relative;
   width: 741px;
   height: 502px;
   background: #d8d8da;
+  opacity: 1;
+}
+
+.product-features-image-title {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  width: 357px;
+  height: 79px;
+  text-align: right;
+  font-family: Regular 18px/28px Calibre;
+  letter-spacing: 0;
+  color: #ffffff;
   opacity: 1;
 }
 
@@ -216,6 +231,86 @@ h1 {
   color: #585858;
   padding-left: 98px;
   opacity: 1;
+}
+
+/* carousel */
+
+.carousel {
+  position: relative;
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__track-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  height: 100%;
+  transition: transform ease-in 250ms;
+}
+
+.carousel__slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.carousel__button--left {
+  left: -45px;
+}
+
+.carousel__button--right {
+  right: -45px;
+}
+
+.carousel__nav {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.carousel__indicator {
+  margin: 0 1em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.current-slide {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.is-hidden {
+  display: none;
 }
 
 @media only screen and (max-width: 1000px) {
