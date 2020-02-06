@@ -1,0 +1,231 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  width: 95%;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.breadcrumb {
+  text-align: left;
+  font: Regular 16px/19px Calibre;
+  letter-spacing: 0;
+  color: #525252;
+  opacity: 1;
+}
+
+.breadcrumb-container {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #d8d8da;
+  border-top: 1px solid #d8d8da;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 49.5px;
+  opacity: 1;
+  width: 100%;
+}
+
+.shop-nav-link {
+  font: Medium 17px/23px Calibre Test;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  text-align: left;
+  text-decoration: none;
+}
+
+.nav-bar {
+  align-items: center;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: row;
+  height: 62px;
+  justify-content: space-between;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.98;
+  width: 100%;
+}
+
+.product-container {
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  width: 80%;
+}
+
+.product-image-container {
+  width: 491px;
+}
+
+.product-details-container {
+  width: 491px;
+}
+
+.product-image-block {
+  background-color: #cfcdcd;
+  height: 469;
+  width: 469;
+}
+
+.product-details-header {
+  text-align: left;
+  font-family: Bold 30px/36px Calibre;
+  letter-spacing: 0;
+  color: #333333;
+  opacity: 1;
+}
+
+.product-details-price {
+  text-align: left;
+  font: Medium 18px/22px Calibre;
+  letter-spacing: 0;
+  color: #535353;
+  opacity: 1;
+}
+
+.product-details-summary {
+  text-align: left;
+  font: Regular 16px/20px Calibre;
+  letter-spacing: 0;
+  color: #818181;
+  opacity: 1;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.dropdown-label {
+  margin-bottom: 5px;
+}
+
+.dropdown {
+  background-color: #ffffff;
+  border-radius: 0;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  font-family: Regular 16px/19px Calibre;
+  letter-spacing: 0;
+  color: #333333;
+  opacity: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("/assets/images/chevron-down.svg") 95% / 15% no-repeat #fff;
+}
+
+.add-to-cart-button {
+  align-items: center;
+  background-color: #000000;
+  font-family: Bold 30px/22px Calibre;
+  font-size: 18px;
+  font-weight: 600;
+  height: 51px;
+  letter-spacing: 0;
+  margin-top: 10px;
+  color: #ffffff;
+  opacity: 1;
+  width: 100%;
+}
+
+.product-features-image {
+  width: 741px;
+  height: 502px;
+  background: #d8d8da;
+  opacity: 1;
+}
+
+.product-features-container {
+  margin-top: 131px;
+}
+
+.product-features-text-block {
+  background: #fafafa 0% 0% no-repeat padding-box;
+  height: 602px;
+  opacity: 1;
+  position: relative;
+  width: 741px;
+}
+
+.product-features-image-block {
+  height: 502px;
+  left: 597px;
+  opacity: 1;
+  position: absolute;
+  /* top: 105%; */
+  top: 809px;
+  width: 741px;
+}
+
+.features-copy-product {
+  width: 86px;
+  height: 19px;
+  text-align: left;
+  font: Medium 16px/19px Calibre;
+  letter-spacing: 0.8px;
+  color: #000000;
+  opacity: 1;
+  padding-top: 153px;
+  padding-left: 81.81px;
+}
+
+.features-copy-header {
+  width: 307px;
+  height: 48px;
+  text-align: left;
+  font: Semibold 40px/48px Calibre;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  padding-left: 81.81px;
+}
+
+.features-copy-paragraph {
+  color: #696969;
+  font: Regular 18px/28px Calibre;
+  height: 79px;
+  letter-spacing: 0;
+  opacity: 1;
+  padding-left: 81.81px;
+  text-align: left;
+  width: 357px;
+}
+
+.features-copy-list {
+  width: 127px;
+  height: 84px;
+  text-align: left;
+  font: Medium Italic 18px/31px Calibre;
+  letter-spacing: 0;
+  color: #585858;
+  padding-left: 98px;
+  opacity: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+  .product-container {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+}
