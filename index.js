@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById("app");
-
   const getProduct = () => {
     return fetch("https://demo5070043.mockable.io/confidant").then(resp =>
       resp.json()
@@ -23,6 +21,70 @@ document.addEventListener("DOMContentLoaded", () => {
       return `<option value="${paper}">${paper}</option>`;
     });
 
+    // PRODUCT IMAGES
+    let carouselImages = [];
+    let indexPos = 0;
+
+    const productImages = productObj.carousel_images.map(image => {
+      carouselImages.push(
+        `<img src="${image}" id="product-image" class="product-image-block" alt="${productObj.title}" />`
+      );
+      return carouselImages;
+    });
+
+    document.addEventListener("click", e => {
+      const image = document.getElementById("product-image");
+
+      if (e.target.dataset.action === "slide-left") {
+        if (indexPos === 0) {
+          indexPos = 4;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos -= 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+
+      if (e.target.dataset.action === "slide-right") {
+        if (indexPos === 4) {
+          indexPos = 0;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos += 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+    });
+
+    document.addEventListener("keydown", function(e) {
+      const image = document.getElementById("product-image");
+
+      var code = e.which || e.keyCode;
+
+      if (code == "37") {
+        e.preventDefault();
+        if (indexPos === 0) {
+          indexPos = 4;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos -= 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+
+      if (code == "39") {
+        e.preventDefault();
+        if (indexPos === 4) {
+          indexPos = 0;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos += 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+    });
+
+    // FEATURES TITLE
     const featureTitle = productObj.title
       .split(" ")
       .splice(0, 1)
@@ -42,17 +104,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.insertAdjacentHTML(
       "beforeend",
-      `
+      productObj
+        ? `
         <div class="breadcrumb-container">
                 <p class="breadcrumb">Notebooks > ${productObj.title}</p>
           </div>
 
             <div class="product-container">
                 <div class="product-image-container">
-                    <img alt="img" class="product-image-block" src="${
-                      productObj.carousel_images[0]
-                    }">
-
+                   <img src="http://plug.nyc/wp-content/uploads/2020/02/Path-1510.svg" alt="previous image" class="chevron-left" data-action="slide-left"  />
+                    ${carouselImages[indexPos]}
+                   <img src="http://plug.nyc/wp-content/uploads/2020/02/Path-1510.svg" alt="previous image" class="chevron-right" data-action="slide-right" />
                 </div>
 
                 <div class="product-details-container">
@@ -105,10 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img alt="img" class="product-features-image" src="assets/images/confidant_hires_gallery_02@2x.png">
                 <p class="product-features-image-title">Signature Clothbound Cover</p>
                 </div>
-            </div> 
+            </div>
 
-            
     `
+        : `
+        <div>
+        <h1>There was an issue fetching the product</h1>
+        </div>
+        `
     );
   };
 
