@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const app = document.getElementById("app");
+  const nav = document.getElementById("nav-bar");
+
   const getProduct = () => {
     return fetch("https://demo5070043.mockable.io/confidant").then(resp =>
       resp.json()
@@ -7,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderProduct = product => {
     const productObj = product.products[0];
-    console.log(productObj);
 
     const sizeOptions = productObj.sizes.map(size => {
       return `<option value="${size}">${size}</option>`;
@@ -27,33 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const productImages = productObj.carousel_images.map(image => {
       carouselImages.push(
-        `<img src="${image}" id="product-image" class="product-image-block" alt="${productObj.title}" />`
+        `<img src="${image}" id="product-image" data-id="product-image" class="product-image-block" alt="${productObj.title}" />`
       );
       return carouselImages;
-    });
-
-    document.addEventListener("click", e => {
-      const image = document.getElementById("product-image");
-
-      if (e.target.dataset.action === "slide-left") {
-        if (indexPos === 0) {
-          indexPos = 4;
-          image.src = productObj.carousel_images[indexPos];
-        } else {
-          indexPos -= 1;
-          image.src = productObj.carousel_images[indexPos];
-        }
-      }
-
-      if (e.target.dataset.action === "slide-right") {
-        if (indexPos === 4) {
-          indexPos = 0;
-          image.src = productObj.carousel_images[indexPos];
-        } else {
-          indexPos += 1;
-          image.src = productObj.carousel_images[indexPos];
-        }
-      }
     });
 
     document.addEventListener("keydown", function(e) {
@@ -84,6 +62,80 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    document.addEventListener("click", e => {
+      const image = document.getElementById("product-image");
+
+      if (e.target.dataset.id === "product-image") {
+        if (indexPos === 0) {
+          indexPos = 4;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos -= 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+
+      if (e.target.dataset.id === "add-to-cart") {
+        e.preventDefault();
+
+        const modal = `
+        <div id="modal" class="cart-modal">
+          <h2 class="modal-header">Added to Cart</h2>
+            <div class="modal-product-container">
+             <img class="modal-image" src="${productObj.carousel_images[0]}" alt="product" />
+             <div class="modal-details-container">
+               <p class="modal-product-title">${productObj.title}</p>
+                <p class="modal-product-price">$${productPrice}</p>
+                </div>
+             </div>
+
+             <button class="modal-button">Proceed to checkout</button>
+             <a data-action="close-modal" class="modal-link" href="#">Keep Shopping</a>
+         </div>
+        <div data-action="close-overlay" id="overlay" class="overlay">
+          </div>
+        `;
+
+        document.body.insertAdjacentHTML("afterbegin", modal);
+      }
+
+      if (e.target.dataset.action === "slide-left") {
+        if (indexPos === 0) {
+          indexPos = 4;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos -= 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+
+      if (e.target.dataset.action === "slide-right") {
+        if (indexPos === 4) {
+          indexPos = 0;
+          image.src = productObj.carousel_images[indexPos];
+        } else {
+          indexPos += 1;
+          image.src = productObj.carousel_images[indexPos];
+        }
+      }
+
+      if (e.target.dataset.action === "close-modal") {
+        e.preventDefault();
+        const modal = document.getElementById("modal");
+        const overlay = document.getElementById("overlay");
+        overlay.remove();
+        modal.remove();
+      }
+
+      if (e.target.dataset.action === "close-overlay") {
+        e.preventDefault();
+        const modal = document.getElementById("modal");
+        const overlay = document.getElementById("overlay");
+        overlay.remove();
+        modal.remove();
+      }
+    });
+
     // FEATURES TITLE
     const featureTitle = productObj.title
       .split(" ")
@@ -102,10 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productPrice = newPrice;
     }
 
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      productObj
-        ? `
+    const productToRender = `
         <div class="breadcrumb-container">
                 <p class="breadcrumb">Notebooks > ${productObj.title}</p>
           </div>
@@ -118,8 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="product-details-container">
+                <div class="product-details-title-price-container">
                     <h1 class="product-details-header">${productObj.title}</h1>
                     <p class="product-details-price">$${productPrice}</p>
+                    </div>
                     <p class="product-details-summary">${
                       productObj.description
                     }</p>
@@ -142,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ${paperOptions}
                             </select>
                         </div>
-                        <button id="${productObj.title
+                        <button data-id="add-to-cart" id="${productObj.title
                           .split(" ")
                           .join(
                             "-"
@@ -156,9 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h1 class="features-copy-header">The book for ideas.</h1>
                     <p class="features-copy-paragraph">Small enough to go everywhere you go and big enough to work with all day long, whether at home, work, or in transit.</p>
                     <ul class="features-copy-list">
-                        <li>Opens Flat</li>
-                        <li>Acid-free Paper</li>
-                        <li>192 Pages</li>
+                        <li class="list-item">Opens Flat</li>
+                        <li class="list-item">Acid-free Paper</li>
+                        <li class="list-item">192 Pages</li>
                     </ul>
 
                 </div>
@@ -169,13 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
 
-    `
-        : `
-        <div>
-        <h1>There was an issue fetching the product</h1>
-        </div>
-        `
-    );
+    `;
+
+    nav.insertAdjacentHTML("afterend", productToRender);
   };
 
   getProduct().then(product => {
